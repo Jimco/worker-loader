@@ -20,6 +20,8 @@ Web Worker loader for webpack 4.
 
 Note that this is specific to webpack 4. To use Web Workers in webpack 5, see https://webpack.js.org/guides/web-workers/.
 
+**Attention**: 大仓项目，构建工程渐进式升级，同时包含 webpack4, webpack5，可使用该插件，定义 webpack 路径。
+
 ## Getting Started
 
 To begin, you'll need to install `worker-loader`:
@@ -78,6 +80,7 @@ And run `webpack` via your preferred method.
 | **[`chunkFilename`](#chunkfilename)** |         `{String}`          | based on `output.chunkFilename` | The filename of non-entry chunks for web workers                                  |
 |        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'` |           `undefined`           | Allow to inline the worker as a `BLOB`                                            |
 |      **[`esModule`](#esmodule)**      |         `{Boolean}`         |             `true`              | Use ES modules syntax                                                             |
+|   **[`webpackPath`](#webpackPath)**   |         `{String}`          | based on `node_modules/webpack` | Specify the real webpack absolute path                                            |
 
 ### `worker`
 
@@ -314,6 +317,33 @@ module.exports = {
         loader: "worker-loader",
         options: {
           esModule: false,
+        },
+      },
+    ],
+  },
+};
+```
+
+### `webpackPath`
+
+Type: `String`
+Default: `node_modules/webpack`
+
+By default, `worker-loader` get the `node_modules/webpack` base on `__dirname`.
+
+You can custom Specify the real webpack absolute path:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: "worker-loader",
+        options: {
+          webpackPath: path.join(process.cwd(), "node_modules/webpack"),
         },
       },
     ],

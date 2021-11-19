@@ -66,6 +66,12 @@
       "type": "boolean",
       "description": "Enable or disable ES module syntax.",
       "link": "https://github.com/webpack-contrib/worker-loader#esmodule"
+    },
+    "webpackPath": {
+      "type": "string",
+      "description": "Specify the real webpack absolute path.",
+      "link": "https://github.com/webpack-contrib/worker-loader#webpackPath",
+      "minLength": 1
     }
   },
   "additionalProperties": false
